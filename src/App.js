@@ -6,11 +6,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {
   AppContainer,
   Title,
-  TaskSummary,
-  TaskTextContainer,
-  TaskDone,
-  KeepItUp,
-  TaskCount,
   Content,
   TaskInputContainer,
   TaskInput,
@@ -23,6 +18,7 @@ import {
   CheckboxContainer,
   Checkbox
 } from './styles/AppStyles';
+import TasksDone from './components/TasksDone';
 
 function App() {
   const [tasks, setTasks] = useState([]);
@@ -68,13 +64,7 @@ function App() {
   return (
     <AppContainer>
       <Title>{<FontAwesomeIcon icon={faSquareCheck} />} TODO</Title>
-      <TaskSummary>
-        <TaskTextContainer>
-          <TaskDone>Task Done</TaskDone>
-          <KeepItUp>Keep it up</KeepItUp>
-        </TaskTextContainer>
-        <TaskCount>{completedTasks}/{tasks.length}</TaskCount>
-      </TaskSummary>
+      <TasksDone completedTasks={completedTasks} totalTasks={tasks.length} />
       <Content>
         <TaskInputContainer>
           <TaskInput

@@ -1,8 +1,8 @@
 {
-  "name": "ejercicios",
+  "name": "todo-list",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://tzipi-bobek.github.io/Ejercicios",
+  "homepage": "https://tzipi-bobek.github.io/todo-list",
   "dependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@emotion/styled": "^11.13.0",

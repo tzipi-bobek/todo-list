@@ -80,7 +80,7 @@ export const TaskTextContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin-right: 60px; /* Aumentar el margen derecho */
+  margin-right: 60px;
 `;
 
 export const TaskDone = styled.div`
