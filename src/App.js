@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faSquareCheck } from '@fortawesome/free-solid-svg-icons';
 import { faPenToSquare, faTrashCan } from '@fortawesome/free-regular-svg-icons';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import {
   AppContainer,
   Title,
@@ -67,7 +68,6 @@ function App() {
   return (
     <AppContainer>
       <Title>{<FontAwesomeIcon icon={faSquareCheck} />} TODO</Title>
-      {/* <ContentContainer> */}
       <TaskSummary>
         <TaskTextContainer>
           <TaskDone>Task Done</TaskDone>
@@ -84,7 +84,7 @@ function App() {
             placeholder="Write your next task"
           />
           <AddButton onClick={addTask}>
-            <FontAwesomeIcon icon={faPlus} />
+            <FontAwesomeIcon icon={faPlus} className="text-dark" />
           </AddButton>
         </TaskInputContainer>
         {tasks.length === 0 ? (
@@ -131,7 +131,6 @@ function App() {
       </Content>
     </AppContainer>
   );
-
 }
 
 export default App;

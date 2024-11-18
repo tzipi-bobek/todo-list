@@ -1,8 +1,15 @@
 import styled from '@emotion/styled';
 
+const colors = {
+  background: '#000000',
+  text: '#ffffff',
+  accent: '#88b53e',
+  inputBackground: '#2c2c2c',
+};
+
 export const AppContainer = styled.div`
-  background-color: #000000;
-  color: #ffffff;
+  background-color: ${colors.background};
+  color: ${colors.text};
   padding: 20px;
   width: 100vw;
   height: 100vh;
@@ -10,6 +17,7 @@ export const AppContainer = styled.div`
   flex-direction: column;
   align-items: center;
   box-sizing: border-box;
+  overflow: auto;
 
   @media (max-width: 600px) {
     padding: 10px;
@@ -26,10 +34,11 @@ export const AppContainer = styled.div`
 
 export const Title = styled.h1`
   margin: 0;
-  color: #ffffff;
+  color: ${colors.text};
   font-size: 2em;
   align-self: flex-start;
   margin-left: 25%;
+  margin-bottom: 20px;
 
   @media (max-width: 600px) {
     font-size: 1.5em;
@@ -38,15 +47,14 @@ export const Title = styled.h1`
 
   @media (min-width: 601px) and (max-width: 1024px) {
     font-size: 1.75em;
-    margin-left: 5%; 
+    margin-left: 5%;
   }
 `;
 
 export const TaskSummary = styled.div`
-  // margin-top: 10px;
   margin-bottom: 20px;
   padding: 20px;
-  border: 1px solid #ffffff;
+  border: 1px solid ${colors.text};
   border-radius: 10px;
   display: flex;
   align-items: center;
@@ -54,8 +62,6 @@ export const TaskSummary = styled.div`
   font-size: 1.2em;
   width: 100%;
   max-width: 400px;
-  margin-left: auto;
-  margin-right: auto;
 
   @media (max-width: 600px) {
     font-size: 1em;
@@ -66,7 +72,7 @@ export const TaskSummary = styled.div`
   @media (min-width: 601px) and (max-width: 1024px) {
     font-size: 1.1em;
     padding: 18px;
-    max-width: 300px; 
+    max-width: 300px;
   }
 `;
 
@@ -74,7 +80,7 @@ export const TaskTextContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin-right: 15px;
+  margin-right: 60px; /* Aumentar el margen derecho */
 `;
 
 export const TaskDone = styled.div`
@@ -102,8 +108,8 @@ export const KeepItUp = styled.div`
 `;
 
 export const TaskCount = styled.span`
-  background-color: #88b53e;
-  color: #ffffff;
+  background-color: ${colors.accent};
+  color: ${colors.text};
   border-radius: 50%;
   padding: 10px;
   display: flex;
@@ -132,6 +138,7 @@ export const Content = styled.div`
   margin-top: 10px;
   width: 100%;
   max-width: 400px;
+  display: flex;
   flex-direction: column;
   align-items: center;
 
@@ -160,8 +167,8 @@ export const TaskInput = styled.input`
   border: none;
   border-radius: 5px;
   margin-right: 10px;
-  background-color: #2c2c2c;
-  color: #ffffff;
+  background-color: ${colors.inputBackground};
+  color: ${colors.text};
 
   &:focus {
     outline: none;
@@ -178,10 +185,15 @@ export const TaskInput = styled.input`
 
 export const AddButton = styled.button`
   padding: 10px;
+  width: 40px; /* Asegura que el ancho y el alto sean iguales */
+  height: 40px; /* Asegura que el ancho y el alto sean iguales */
+  align-items: center;
+  display: flex;
+  justify-content: center;
   border: none;
   border-radius: 5px;
-  background-color: #88b53e;
-  color: #ffffff;
+  background-color: ${colors.accent};
+  color: ${colors.text};
   cursor: pointer;
 
   @media (max-width: 600px) {
@@ -206,12 +218,12 @@ export const TaskItem = styled.li`
   align-items: center;
   padding: 10px;
   background-color: transparent;
-  border: 1px solid #ffffff;
+  border: 1px solid ${colors.text};
   border-radius: 0;
   margin-bottom: 10px;
   width: 100%;
   position: relative;
-  min-height: 30px;
+  min-height: 60px;
 
   @media (max-width: 600px) {
     padding: 8px;
@@ -224,7 +236,7 @@ export const TaskItem = styled.li`
 
 export const TaskName = styled.input`
   flex: 1;
-  color: #ffffff;
+  color: ${colors.text};
   background-color: transparent;
   border: none;
   outline: none;
@@ -244,7 +256,7 @@ export const EditButton = styled.button`
   border: none;
   border-radius: 5px;
   background-color: transparent;
-  color: #ffffff;
+  color: ${colors.text};
   cursor: pointer;
   margin-left: 5px;
 
@@ -253,7 +265,7 @@ export const EditButton = styled.button`
   }
 
   @media (min-width: 601px) and (max-width: 1024px) {
-    padding: 4.5px;
+    padding: 5px;
   }
 `;
 
@@ -262,7 +274,7 @@ export const DeleteButton = styled.button`
   border: none;
   border-radius: 5px;
   background-color: transparent;
-  color: #ffffff;
+  color: ${colors.text};
   cursor: pointer;
   margin-left: 5px;
 
@@ -285,13 +297,13 @@ export const Checkbox = styled.input`
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  border: 2px solid #88b53e;
+  border: 2px solid ${colors.accent};
   appearance: none;
   background-color: transparent;
   cursor: pointer;
 
   &:checked {
-    background-color: #88b53e;
+    background-color: ${colors.accent};
   }
 
   @media (max-width: 600px) {
