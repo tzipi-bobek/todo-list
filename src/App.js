@@ -1,15 +1,12 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faSquareCheck } from '@fortawesome/free-solid-svg-icons';
+import { faSquareCheck } from '@fortawesome/free-solid-svg-icons';
 import { faPenToSquare, faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
   AppContainer,
   Title,
   Content,
-  TaskInputContainer,
-  TaskInput,
-  AddButton,
   TaskList,
   TaskItem,
   TaskName,
@@ -19,6 +16,8 @@ import {
   Checkbox
 } from './styles/AppStyles';
 import TasksDone from './components/TasksDone';
+import ToolBar from './components/ToolBar';
+import List from './components/List';
 
 function App() {
   const [tasks, setTasks] = useState([]);
@@ -66,17 +65,7 @@ function App() {
       <Title>{<FontAwesomeIcon icon={faSquareCheck} />} TODO</Title>
       <TasksDone completedTasks={completedTasks} totalTasks={tasks.length} />
       <Content>
-        <TaskInputContainer>
-          <TaskInput
-            type="text"
-            value={newTask}
-            onChange={(e) => setNewTask(e.target.value)}
-            placeholder="Write your next task"
-          />
-          <AddButton onClick={addTask}>
-            <FontAwesomeIcon icon={faPlus} className="text-dark" />
-          </AddButton>
-        </TaskInputContainer>
+        <ToolBar newTask={newTask} setNewTask={setNewTask} addTask={addTask} />
         {tasks.length === 0 ? (
           <p>Seems lonely in here, what are you up to?</p>
         ) : (
@@ -117,6 +106,9 @@ function App() {
               </TaskItem>
             ))}
           </TaskList>
+            toggleComplete={toggleComplete}
+            deleteTask={deleteTask}
+          />
         )}
       </Content>
     </AppContainer>
