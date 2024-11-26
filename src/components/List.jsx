@@ -12,7 +12,7 @@ const TaskListComponent = ({ tasks, editingIndex, toggleEdit, editTask, handleBl
             type="text"
             value={task.name}
             onChange={(e) => editTask(index, e.target.value)}
-            onBlur={handleBlur}
+            onBlur={() => handleBlur(task.id, task.name, task.completed)}
             autoFocus
           />
         ) : (
@@ -21,7 +21,7 @@ const TaskListComponent = ({ tasks, editingIndex, toggleEdit, editTask, handleBl
               <Checkbox
                 type="checkbox"
                 checked={task.completed}
-                onChange={() => toggleComplete(index)}
+                onChange={() => toggleComplete(task.id)}
               />
             </CheckboxContainer>
             <TaskName
@@ -33,7 +33,7 @@ const TaskListComponent = ({ tasks, editingIndex, toggleEdit, editTask, handleBl
             <EditButton onClick={() => toggleEdit(index)}>
               <FontAwesomeIcon icon={faPenToSquare} />
             </EditButton>
-            <DeleteButton onClick={() => deleteTask(index)}>
+            <DeleteButton onClick={() => deleteTask(task.id)}>
               <FontAwesomeIcon icon={faTrashCan} />
             </DeleteButton>
           </>
