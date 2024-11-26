@@ -6,43 +6,57 @@ import { AppContainer, Title, Content } from './styles/AppStyles';
 import TasksDone from './components/TasksDone';
 import ToolBar from './components/ToolBar';
 import List from './components/List';
+import useGetTasks from './hooks/useGetTasks';
+import useCreateTask from './hooks/useCreateTask';
+import useEditTask from './hooks/useEditTask';
+import useDeleteTask from './hooks/useDeleteTask';
 
 function App() {
-  const [tasks, setTasks] = useState([]);
+  const { tasks, setTasks } = useGetTasks();
+  const { createTask } = useCreateTask();
+  const { editTask } = useEditTask();
+  const { deleteTask } = useDeleteTask();
   const [newTask, setNewTask] = useState('');
   const [editingIndex, setEditingIndex] = useState(null);
 
-  const addTask = () => {
+  const addTask = async () => {
     if (newTask.trim() !== '') {
-      setTasks([...tasks, { name: newTask, isEditing: false, completed: false }]);
+      const taskName = newTask;
       setNewTask('');
+      const newTaskData = await createTask(taskName);
+      setTasks([...tasks, newTaskData]);
     }
   };
 
-  const deleteTask = (index) => {
-    const updatedTasks = tasks.filter((_, i) => i !== index);
-    setTasks(updatedTasks);
+  const handleDeleteTask = async (id) => {
+    setTasks(tasks.filter(task => task.id !== id));
+    await deleteTask(id);
   };
 
-  const editTask = (index, newName) => {
+  const handleEditTask = (index, newName) => {
     const updatedTasks = tasks.map((task, i) =>
       i === index ? { ...task, name: newName } : task
     );
     setTasks(updatedTasks);
   };
 
+  const saveEditTask = async (id, name, completed) => {
+    const updatedTask = await editTask(id, name, completed);
+    setTasks(tasks.map(task => (task.id === id ? updatedTask : task)));
+  };
+
   const toggleEdit = (index) => {
     setEditingIndex(index);
   };
 
-  const toggleComplete = (index) => {
-    const updatedTasks = tasks.map((task, i) =>
-      i === index ? { ...task, completed: !task.completed } : task
-    );
-    setTasks(updatedTasks);
+  const toggleComplete = async (id) => {
+    const task = tasks.find(task => task.id === id);
+    setTasks(tasks.map(task => (task.id === id ? { ...task, completed: !task.completed } : task)));
+    await editTask(id, task.name, !task.completed);
   };
 
-  const handleBlur = () => {
+  const handleBlur = async (id, name, completed) => {
+    await saveEditTask(id, name, completed);
     setEditingIndex(null);
   };
 
@@ -61,10 +75,10 @@ function App() {
             tasks={tasks}
             editingIndex={editingIndex}
             toggleEdit={toggleEdit}
-            editTask={editTask}
+            editTask={handleEditTask}
             handleBlur={handleBlur}
             toggleComplete={toggleComplete}
-            deleteTask={deleteTask}
+            deleteTask={handleDeleteTask}
           />
         )}
       </Content>
