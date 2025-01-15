@@ -4,16 +4,20 @@
   "main": "index.js",
   "scripts": {
     "start": "node src/server.js",
-    "schema:migrate": "npx sequelize-cli db:migrate",
+    "migrate": "node migrations/20241120200108-migration.js",
+    "vercel": "vercel",
+    "vercel prod": "vercel --prod",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@supabase/supabase-js": "^2.47.2",
     "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
     "express": "^4.21.1",
-    "sequelize": "^6.37.5",
-    "sqlite3": "^5.1.7"
+    "supabase": "^2.0.0",
+    "vercel": "^39.1.3"
   }
 }
