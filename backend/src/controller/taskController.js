@@ -20,7 +20,7 @@ class TaskController {
   async createTask(req, res) {
     try {
       const { name } = req.body;
-      const newTask = await Task.create({ name });
+      const newTask = await Task.create({ name, completed: false });
       res.json(newTask);
     } catch (error) {
       res.status(500).json({ error: 'Failed to create task' });
@@ -33,10 +33,8 @@ class TaskController {
       const { name, completed } = req.body;
       const task = await Task.findByPk(id);
       if (task) {
-        task.name = name;
-        task.completed = completed;
-        await task.save();
-        res.json(task);
+        const updatedTask = await Task.update(id, { name, completed });
+        res.json(updatedTask);
       } else {
         res.status(404).send('Task not found');
       }
@@ -50,7 +48,7 @@ class TaskController {
       const { id } = req.params;
       const task = await Task.findByPk(id);
       if (task) {
-        await task.destroy();
+        await Task.delete(id);
         res.json({ message: 'Task deleted' });
       } else {
         res.status(404).send('Task not found');

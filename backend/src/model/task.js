@@ -1,24 +1,35 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('../config/dbconfig');
+const supabase = require('../config/supabaseClient');
 
-const Task = sequelize.define('Task', {
-  id: {
-    type: DataTypes.INTEGER,
-    autoIncrement: true,
-    primaryKey: true,
-    allowNull: false,
-  },
-  name: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  completed: {
-    type: DataTypes.BOOLEAN,
-    defaultValue: false,
-  },
-}, {
-  tableName: 'tasks',
-  timestamps: true,
-});
+class Task {
+  static async findAll() {
+    const { data, error } = await supabase.from('tasks').select('*');
+    if (error) throw error;
+    return data;
+  }
+
+  static async create(task) {
+    const { data, error } = await supabase.from('tasks').insert(task).select().single();
+    if (error) throw error;
+    return data;
+  }
+
+  static async findByPk(id) {
+    const { data, error } = await supabase.from('tasks').select('*').eq('id', id).single();
+    if (error) throw error;
+    return data;
+  }
+
+  static async update(id, updates) {
+    const { data, error } = await supabase.from('tasks').update(updates).select('*').eq('id', id).single();
+    if (error) throw error;
+    return data;
+  }
+
+  static async delete(id) {
+    const { data, error } = await supabase.from('tasks').delete().eq('id', id);
+    if (error) throw error;
+    return data;
+  }
+}
 
 module.exports = Task;
