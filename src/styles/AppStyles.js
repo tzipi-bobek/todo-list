@@ -241,6 +241,9 @@ export const TaskName = styled.input`
   border: none;
   outline: none;
   cursor: pointer;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
   &:disabled {
     cursor: default;
