@@ -2,10 +2,8 @@ import axios from 'axios';
 
 const useCreateTask = () => {
   const createTask = async (name) => {
-    console.log('creando un nuevo task con name: ', name)
     try {
-      const response = await axios.post('http://localhost:3001/save', { name });
-      console.log('id de el task creado: ', response.data.id)
+      const response = await axios.post(`${process.env.REACT_APP_PORT}/save`, { name });
       return response.data;
     } catch (e) {
       throw new Error('Error creating task', e);

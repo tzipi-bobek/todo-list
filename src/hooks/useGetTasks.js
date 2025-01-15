@@ -7,7 +7,7 @@ const useGetTasks = () => {
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const response = await axios.get('http://localhost:3001/tasks');
+        const response = await axios.get(`${process.env.REACT_APP_PORT}/tasks`);
         setTasks(response.data);
       } catch (e) {
         console.error('Error al intentar conseguir tasks', e);
