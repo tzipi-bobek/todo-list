@@ -205,6 +205,18 @@ export const AddButton = styled.button`
   }
 `;
 
+export const NoTasksMessage = styled.p`
+  font-size: 1em;
+
+  @media (max-width: 600px) {
+    font-size: 0.8em;
+  }
+
+  @media (min-width: 601px) and (max-width: 1024px) {
+    font-size: 0.9em;
+  }
+`;
+
 export const TaskList = styled.ul`
   list-style: none;
   padding: 0;

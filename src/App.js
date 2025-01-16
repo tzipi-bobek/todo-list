@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSquareCheck } from '@fortawesome/free-solid-svg-icons';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { AppContainer, Title, Content } from './styles/AppStyles';
+import { AppContainer, Title, Content, NoTasksMessage } from './styles/AppStyles';
 import TasksDone from './components/TasksDone';
 import ToolBar from './components/ToolBar';
 import List from './components/List';
@@ -69,7 +69,7 @@ function App() {
       <Content>
         <ToolBar newTask={newTask} setNewTask={setNewTask} addTask={addTask} />
         {tasks.length === 0 ? (
-          <p>Seems lonely in here, what are you up to?</p>
+          <NoTasksMessage>Seems lonely in here, what are you up to?</NoTasksMessage>
         ) : (
           <List
             tasks={tasks}
